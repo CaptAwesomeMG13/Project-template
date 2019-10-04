@@ -10,8 +10,31 @@ logger = logging.getLogger(__name__)
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-SCREEN_TITLE = ""
+SCREEN_TITLE = "Space Defender"
 
+#Bullet and Enemies Variables
+BULLET_DAMAGE = 10
+SmallEnemyHP = 30
+MediumEnemyHP = 60
+LargeEnemyHP = 100
+
+#Score Variables
+HIT_SCORE = 10
+KILL_SCORE = 100
+
+class Bullet(arcade.Sprite):
+    def __init__(self, position, velocity, damage):
+        super().__init__("assets/bullet.png", 0.5)
+        (self.center_x, self.center_y) = position
+        (self.dx, self.dy) = velocity
+        self.damage = damage
+
+    def update(self):
+        '''
+        Moves the bullet
+        '''
+        self.center_x += self.dx
+        self.center_y += self.dy
 
 class Window(arcade.Window):
 
@@ -46,10 +69,11 @@ class Window(arcade.Window):
         pass
 
     def on_mouse_press(self, x, y, button, modifiers):
-        """
-        Called when the user presses a mouse button.
-        """
-        pass
+        if button == arcade.MOUSE_BUTTON_LEFT:
+            x = self.player.center_x
+            y = self.player.center_y + 15
+            bullet = Bullet((x,y),(0,10),BULLET_DAMAGE)
+            self.bullet_list.append(bullet)
 
     def on_mouse_release(self, x, y, button, modifiers):
         """

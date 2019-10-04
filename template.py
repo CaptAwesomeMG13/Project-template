@@ -17,8 +17,11 @@ STARTING_LOCATION = (400,100)
 #Bullet and Enemies Variables
 BULLET_DAMAGE = 10
 NUM_ENEMIES = 2
+SmallEnemies = 2
 SmallEnemyHP = 30
+MediumEnemies = 2
 MediumEnemyHP = 60
+LargeEnemies = 2
 LargeEnemyHP = 100
 
 #Score Variables
@@ -73,49 +76,74 @@ class Window(arcade.Window):
         self.set_mouse_visible(True)
         arcade.set_background_color(open_color.blue_4)
         self.bullet_list = arcade.SpriteList()
-        self.enemy_list = arcade.SpriteList()
+        self.enemy_list_small = arcade.SpriteList()
+        self.enemy_list_medium = arcade.SpriteList()
+        self.enemy_list_large = arcade.SpriteList()
         self.player = Player()
         self.score = 0
 
 
     def setup(self):
-        for i in range(NUM_ENEMIES):
-            x = 120 * (i+1) + 40
-            y = 500
-            enemyS = EnemyS((x,y))
-            self.enemy_list.append(enemyS)   
-            enemyM = EnemyM((x,y))
-            self.enemy_list.append(enemyM)
-            enemyL = EnemyL((x,y))
-            self.enemy_list.append(enemyL)
+        for i in range(SmallEnemies):
+            xs = 175 
+            ys = 500 * (i+1) - 40
+            enemyS = EnemyS((xs,ys))
+            self.enemy_list_small.append(enemyS)
 
+        for i in range(MediumEnemies):
+            xm = 375
+            ym = 500 * (i+1) - 40
+            enemyM = EnemyM((xm,ym))
+            self.enemy_list_medium.append(enemyM)
+
+        for i in range(LargeEnemies):
+            xl = 625 
+            yl = 500 * (i+1) - 40
+            enemyL = EnemyL((xl,yl))
+            self.enemy_list_large.append(enemyL)
 
 
     def update(self, delta_time):
         self.bullet_list.update()
-        for e in self.enemy_list:
+
+        #Small Kill and Score
+        for e in self.enemy_list_small:
             hit = arcade.check_for_collision_with_list(e, self.bullet_list)
             for h in hit:
                 e.hp = e.hp - h.damage
                 self.score += HIT_SCORE
                 h.kill()
                 if e.hp <=0:
-                    if e == EnemyS:
-                        self.score += KillScoreS
-                    elif e == EnemyM:
-                        self.score += KillScoreM
-                    elif e == EnemyL:
-                        self.score += KillScoreL
+                    self.score += KillScoreS
+
+        #Medium Kill and Score
+        for e in self.enemy_list_medium:
+            hit = arcade.check_for_collision_with_list(e, self.bullet_list)
+            for h in hit:
+                e.hp = e.hp - h.damage
+                self.score += HIT_SCORE
+                h.kill()
+                if e.hp <=0:
+                    self.score += KillScoreM
+
+        #Large Kill and Score
+        for e in self.enemy_list_large:
+            hit = arcade.check_for_collision_with_list(e, self.bullet_list)
+            for h in hit:
+                e.hp = e.hp - h.damage
+                self.score += HIT_SCORE
+                h.kill()
+                if e.hp <=0:
+                    self.score += KillScoreL
 
     def on_draw(self):
         arcade.start_render()
         arcade.draw_text(str(self.score), 20, SCREEN_HEIGHT - 40, open_color.white, 16)
         self.player.draw()
         self.bullet_list.draw()
-        self.enemy_list.draw()
-
-
-
+        self.enemy_list_large.draw()
+        self.enemy_list_medium.draw()
+        self.enemy_list_small.draw()
 
     def on_mouse_motion(self, x, y, dx, dy):
         self.player.center_x = x

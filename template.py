@@ -16,7 +16,7 @@ STARTING_LOCATION = (400,100)
 
 #Bullet and Enemies Variables
 BULLET_DAMAGE = 10
-NUM_ENEMIES = 10
+NUM_ENEMIES = 2
 SmallEnemyHP = 30
 MediumEnemyHP = 60
 LargeEnemyHP = 100
@@ -29,7 +29,7 @@ KillScoreL = 150
 
 class Bullet(arcade.Sprite):
     def __init__(self, position, velocity, damage):
-        super().__init__("assets/bullet.png", 0.5)
+        super().__init__("assets/laserBlue1.png", 0.5)
         (self.center_x, self.center_y) = position
         (self.dx, self.dy) = velocity
         self.damage = damage
@@ -40,27 +40,27 @@ class Bullet(arcade.Sprite):
 
 class Player(arcade.Sprite):
     def __init__(self):
-        super().__init__("assets/narwhal.png", 0.5)
+        super().__init__("assets/PlayerBlue.png", 0.5)
         (self.center_x, self.center_y) = STARTING_LOCATION
 
 #Small Enemy
 class EnemyS(arcade.Sprite):
     def __init__(self, position):
-        super().__init__("assets/penguin.png", 0.5)
+        super().__init__("assets/MeteorSmall1.png", 0.5)
         self.hp = SmallEnemyHP
         (self.center_x, self.center_y) = position
 
 #Medium Enemy
 class EnemyM(arcade.Sprite):
     def __init__(self, position):
-        super().__init__("assets/penguin.png", 0.5)
+        super().__init__("assets/MeteorMedium1.png", 0.5)
         self.hp = MediumEnemyHP
         (self.center_x, self.center_y) = position
 
 #Large Enemy
 class EnemyL(arcade.Sprite):
     def __init__(self, position):
-        super().__init__("assets/penguin.png", 0.5)
+        super().__init__("assets/MeteorLarge1.png", 0.5)
         self.hp = LargeEnemyHP
         (self.center_x, self.center_y) = position
 

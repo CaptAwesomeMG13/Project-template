@@ -1,6 +1,8 @@
 # Project-template-05
 
-This is a generic Python template designed to get you started on a project for MSCH-C220. I have added a few things that will hopefully be helpful to you.
+For this project I am making a space shooter. The basic idea is a mix of galaga and asteroids.
+You can control the player ship with the mouse and click to fire the weapon. You move across 
+the bottom of the screen to protect your space station. 
 
 Credit:
 https://www.pngfly.com/png-d9zh26/download.html

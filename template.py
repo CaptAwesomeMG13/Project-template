@@ -73,7 +73,8 @@ class Window(arcade.Window):
         file_path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(file_path)
         self.set_mouse_visible(True)
-        arcade.set_background_color(open_color.black)
+        self.background= arcade.load_texture("assets/blue.png")
+        #arcade.set_background_color(open_color.black)
         self.bullet_list = arcade.SpriteList()
         self.enemy_list_small = arcade.SpriteList()
         self.enemy_list_medium = arcade.SpriteList()
@@ -143,7 +144,8 @@ class Window(arcade.Window):
 
     def on_draw(self):
         arcade.start_render()
-        arcade.draw_text(str(self.score), 20, SCREEN_HEIGHT - 40, open_color.white, 16)
+        arcade.draw_texture_rectangle(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
+        #arcade.draw_text(str(self.score), 20, SCREEN_HEIGHT - 40, open_color.white, 16)
         self.player.draw()
         self.bullet_list.draw()
         self.enemy_list_large.draw()

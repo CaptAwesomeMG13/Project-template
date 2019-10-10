@@ -86,19 +86,19 @@ class Window(arcade.Window):
     def setup(self):
         for i in range(SmallEnemies):
             xs = 175 
-            ys = 500 * (i+1) - 40
+            ys = 300 * (i+1) - 20
             enemyS = EnemyS((xs,ys))
             self.enemy_list_small.append(enemyS)
 
         for i in range(MediumEnemies):
             xm = 375
-            ym = 500 * (i+1) - 40
+            ym = 300 * (i+1) - 20
             enemyM = EnemyM((xm,ym))
             self.enemy_list_medium.append(enemyM)
 
         for i in range(LargeEnemies):
             xl = 625 
-            yl = 500 * (i+1) - 40
+            yl = 300 * (i+1) - 20
             enemyL = EnemyL((xl,yl))
             self.enemy_list_large.append(enemyL)
 
@@ -145,7 +145,7 @@ class Window(arcade.Window):
     def on_draw(self):
         arcade.start_render()
         arcade.draw_texture_rectangle(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, SCREEN_WIDTH, SCREEN_HEIGHT, self.background)
-        #arcade.draw_text(str(self.score), 20, SCREEN_HEIGHT - 40, open_color.white, 16)
+        arcade.draw_text(str(self.score), 20, SCREEN_HEIGHT - 40, open_color.white, 16)
         self.player.draw()
         self.bullet_list.draw()
         self.enemy_list_large.draw()
